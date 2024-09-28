@@ -9,20 +9,26 @@ export type ListType = {
 };
 
 const App = () => {
-  const [listOne, setListOne] = useState<ListType[]>(() =>
-    JSON.parse(localStorage.getItem('listOne') || '[]')
-  );
-  const [listTwo, setListTwo] = useState<ListType[]>(() =>
-    JSON.parse(localStorage.getItem('listTwo') || '[]')
-  );
+  const [listOne, setListOne] = useState<ListType[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('listOne') || '[]');
+    } catch {
+      return [];
+    }
+  });
+
+  const [listTwo, setListTwo] = useState<ListType[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('listTwo') || '[]');
+    } catch {
+      return [];
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem('listOne', JSON.stringify(listOne));
-  }, [listOne]);
-
-  useEffect(() => {
     localStorage.setItem('listTwo', JSON.stringify(listTwo));
-  }, [listTwo]);
+  }, [listOne, listTwo]);
 
   return (
     <div className='h-screen w-full flex flex-col items-center gap-10 overflow-y-auto no-scrollbar'>
@@ -31,11 +37,10 @@ const App = () => {
           Enhanced Todo List
         </p>
       </div>
-      <div className='flex flex-col gap-6 md:gap-10 items-center h-full w-full mt-4 md:pt-10 pb-10 '>
+      <div className='flex flex-col gap-6 md:gap-10 items-center h-full w-full mt-4 md:pt-10 pb-10'>
         <div className='flex flex-col md:flex-row gap-6 md:gap-16'>
           <List list={listOne} setList={setListOne} label={'Task List'} />
           <List list={listTwo} setList={setListTwo} label={'Done Tasks'} />
-          {/*<ListTwo listTwo={listTwo} setListTwo={setListTwo} />*/}
         </div>
         {(listOne.length > 0 || listTwo.length > 0) && (
           <Transfer

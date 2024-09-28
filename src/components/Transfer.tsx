@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { ListType } from '../App';
 
 const Transfer = ({
@@ -12,59 +11,47 @@ const Transfer = ({
   listOne: ListType[];
   setListOne: (val: ListType[]) => void;
 }) => {
-  const [isSelected, setIsSelected] = useState(false);
-  const shiftSelectedContentToRight = () => {
-    const seletecItem = listOne.filter((item) => item.isSelected === true);
-    setListOne(listOne.filter((item) => item.isSelected === false));
-    const newItem: ListType[] = seletecItem.map((item) => {
-      return {
-        ...item,
-        isSelected: false,
-      };
-    });
-    setListTwo([...listTwo, ...newItem]);
+  const shiftSelectedContent = (
+    fromList: ListType[],
+    setFromList: (val: ListType[]) => void,
+    toList: ListType[],
+    setToList: (val: ListType[]) => void
+  ) => {
+    const selectedItems = fromList.filter((item) => item.isSelected);
+    if (selectedItems.length === 0) return;
+
+    setFromList(fromList.filter((item) => !item.isSelected));
+    setToList([
+      ...toList,
+      ...selectedItems.map((item) => ({ ...item, isSelected: false })),
+    ]);
   };
+
   const deleteSelectedItems = () => {
-    const updatedListOne = listOne.filter((item) => !item.isSelected); // Keep only unselected items
-    const updatedListTwo = listTwo.filter((item) => !item.isSelected); // Keep only unselected items
-    setListOne(updatedListOne);
-    setListTwo(updatedListTwo);
+    setListOne(listOne.filter((item) => !item.isSelected));
+    setListTwo(listTwo.filter((item) => !item.isSelected));
   };
-  const shiftSelectedContentToLeft = () => {
-    const seletecItem = listTwo.filter((item) => item.isSelected === true);
-    setListTwo(listTwo.filter((item) => item.isSelected === false));
-    const newItem: ListType[] = seletecItem.map((item) => {
-      return {
-        ...item,
-        isSelected: false,
-      };
-    });
-    setListOne([...listOne, ...newItem]);
-  };
-  useEffect(() => {
-    const hasSelection = (list: ListType[]) =>
-      list.some((item) => item.isSelected === true);
 
-    if (hasSelection(listOne) || hasSelection(listTwo)) {
-      setIsSelected(true);
-    } else {
-      setIsSelected(false);
-    }
-  }, [listOne, listTwo]);
+  const anyItemSelected =
+    listOne.some((item) => item.isSelected) ||
+    listTwo.some((item) => item.isSelected);
 
-  if (!isSelected) {
-    return;
-  }
+  if (!anyItemSelected) return null;
+
   return (
     <div className='flex flex-row gap-3 md:gap-6'>
       <button
-        onClick={shiftSelectedContentToRight}
+        onClick={() =>
+          shiftSelectedContent(listOne, setListOne, listTwo, setListTwo)
+        }
         className='bg-green-400 p-2 rounded-lg md:w-24'
       >
         Done
       </button>
       <button
-        onClick={shiftSelectedContentToLeft}
+        onClick={() =>
+          shiftSelectedContent(listTwo, setListTwo, listOne, setListOne)
+        }
         className='bg-violet-500 p-2 rounded-lg md:w-24'
       >
         Not Done
