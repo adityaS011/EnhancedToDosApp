@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import ListOne from './components/List';
-//import ListTwo from './components/ListTwo';
 import Transfer from './components/Transfer';
 import List from './components/List';
 

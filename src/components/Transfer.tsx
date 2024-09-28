@@ -42,11 +42,14 @@ const Transfer = ({
     setListOne([...listOne, ...newItem]);
   };
   useEffect(() => {
-    const isItemSelected =
-      listOne.filter((item) => item.isSelected === true).length !== 0 ||
-      listTwo.filter((item) => item.isSelected === true).length !== 0;
+    const hasSelection = (list: ListType[]) =>
+      list.some((item) => item.isSelected === true);
 
-    setIsSelected(isItemSelected);
+    if (hasSelection(listOne) || hasSelection(listTwo)) {
+      setIsSelected(true);
+    } else {
+      setIsSelected(false);
+    }
   }, [listOne, listTwo]);
 
   if (!isSelected) {
