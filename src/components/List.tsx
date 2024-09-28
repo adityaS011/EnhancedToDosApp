@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { List } from '../App';
 import CheckboxDemo from './CheckBox';
+import { ListType } from '../App';
 
-const ListTwo = ({
-  listTwo,
-  setListTwo,
+const List = ({
+  list,
+  setList,
+  label,
 }: {
-  listTwo: List[];
-  setListTwo: (val: List[]) => void;
+  list: ListType[];
+  setList: (val: ListType[]) => void;
+  label: string;
 }) => {
   const [inputText, setInputText] = useState(''); // Single state to manage input
 
@@ -15,29 +17,29 @@ const ListTwo = ({
     const trimmedText = inputText.trim();
     if (!trimmedText) return; // Prevent adding empty items
 
-    const newList: List[] = [
-      ...listTwo,
+    const newList: ListType[] = [
+      ...list,
       { title: trimmedText, isSelected: false },
     ];
-    setListTwo(newList);
+    setList(newList);
 
     setInputText(''); // Clear input after adding item
   };
 
   const selectCurrentItem = (index: number) => {
-    const updatedList: List[] = listTwo.map((item, idx) =>
+    const updatedList: ListType[] = list.map((item, idx) =>
       idx === index ? { ...item, isSelected: !item.isSelected } : item
     );
 
-    setListTwo(updatedList);
+    setList(updatedList);
   };
 
   return (
-    <div className='border border-gray-400 gap-6 flex flex-col p-4 items-center bg-gray-100 opacity-80 rounded-lg shadow-slate-200 shadow-lg'>
-      <h2>Done Task</h2>
+    <div className='border border-gray-400 gap-6 flex flex-col p-4 items-center bg-gray-100 rounded-lg shadow-slate-200 shadow-lg'>
+      <h2>{label}</h2>
       <ul className='flex flex-col gap-3 w-full'>
-        {listTwo.length > 0 ? (
-          listTwo.map((item, index) => (
+        {list.length > 0 ? (
+          list.map((item, index) => (
             <li key={index}>
               <CheckboxDemo
                 className='flex flex-row items-center gap-2'
@@ -68,7 +70,7 @@ const ListTwo = ({
           </button>
           <button
             className='bg-red-500 text-black p-2 rounded-lg w-24'
-            onClick={() => setListTwo([])}
+            onClick={() => setList([])}
           >
             Clear All
           </button>
@@ -78,4 +80,4 @@ const ListTwo = ({
   );
 };
 
-export default ListTwo;
+export default List;

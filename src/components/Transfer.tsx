@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { List } from '../App';
+import { ListType } from '../App';
 
 const Transfer = ({
   listOne,
@@ -7,16 +7,16 @@ const Transfer = ({
   listTwo,
   setListTwo,
 }: {
-  listTwo: List[];
-  setListTwo: (val: List[]) => void;
-  listOne: List[];
-  setListOne: (val: List[]) => void;
+  listTwo: ListType[];
+  setListTwo: (val: ListType[]) => void;
+  listOne: ListType[];
+  setListOne: (val: ListType[]) => void;
 }) => {
   const [isSelected, setIsSelected] = useState(false);
   const shiftSelectedContentToRight = () => {
     const seletecItem = listOne.filter((item) => item.isSelected === true);
     setListOne(listOne.filter((item) => item.isSelected === false));
-    const newItem: List[] = seletecItem.map((item) => {
+    const newItem: ListType[] = seletecItem.map((item) => {
       return {
         ...item,
         isSelected: false,
@@ -33,7 +33,7 @@ const Transfer = ({
   const shiftSelectedContentToLeft = () => {
     const seletecItem = listTwo.filter((item) => item.isSelected === true);
     setListTwo(listTwo.filter((item) => item.isSelected === false));
-    const newItem: List[] = seletecItem.map((item) => {
+    const newItem: ListType[] = seletecItem.map((item) => {
       return {
         ...item,
         isSelected: false,

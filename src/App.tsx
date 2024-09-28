@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import ListOne from './components/ListOne';
-import ListTwo from './components/ListTwo';
+import ListOne from './components/List';
+//import ListTwo from './components/ListTwo';
 import Transfer from './components/Transfer';
+import List from './components/List';
 
-export type List = {
+export type ListType = {
   title: string;
   isSelected: boolean;
 };
 
 const App = () => {
-  const [listOne, setListOne] = useState<List[]>(() =>
+  const [listOne, setListOne] = useState<ListType[]>(() =>
     JSON.parse(localStorage.getItem('listOne') || '[]')
   );
-  const [listTwo, setListTwo] = useState<List[]>(() =>
+  const [listTwo, setListTwo] = useState<ListType[]>(() =>
     JSON.parse(localStorage.getItem('listTwo') || '[]')
   );
 
@@ -34,8 +35,9 @@ const App = () => {
       </div>
       <div className='flex flex-col gap-6 md:gap-10 items-center h-full w-full mt-4 md:pt-10 pb-10 '>
         <div className='flex flex-col md:flex-row gap-6 md:gap-16'>
-          <ListOne listOne={listOne} setListOne={setListOne} />
-          <ListTwo listTwo={listTwo} setListTwo={setListTwo} />
+          <List list={listOne} setList={setListOne} label={'Task List'} />
+          <List list={listTwo} setList={setListTwo} label={'Done Tasks'} />
+          {/*<ListTwo listTwo={listTwo} setListTwo={setListTwo} />*/}
         </div>
         {(listOne.length > 0 || listTwo.length > 0) && (
           <Transfer
