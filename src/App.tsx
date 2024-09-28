@@ -26,13 +26,13 @@ const App = () => {
   }, [listTwo]);
 
   return (
-    <div className='h-screen w-full flex flex-col items-center gap-10'>
+    <div className='h-screen w-full flex flex-col items-center gap-10 mb-10'>
       <div className='hover:animate-bounce transition-transform'>
         <p className='mt-10 p-4 bg-orange-300 uppercase text-3xl transition-all duration-500 ease-in-out text-purple-800 font-semibold shadow-lg rounded-xl transform hover:scale-110 hover:-rotate-3 hover:bg-purple-300'>
           Enhanced Todo List
         </p>
       </div>
-      <div className='flex flex-col gap-3 md:gap-10 items-center h-full w-full mt-10'>
+      <div className='flex flex-col gap-6 md:gap-10 items-center h-full w-full mt-10'>
         <div className='flex flex-col md:flex-row gap-6 md:gap-16'>
           <ListOne listOne={listOne} setListOne={setListOne} />
           <ListTwo listTwo={listTwo} setListTwo={setListTwo} />
