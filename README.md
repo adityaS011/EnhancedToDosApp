@@ -61,17 +61,14 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 Fork the repository.
 Create your feature branch:
 ```bash
-Copy code
 git checkout -b feature/YourFeature 
 ```
 Commit your changes:
 ```bash
-Copy code
 git commit -m 'Add some feature'
 ```
 Push to the branch:
 ```bash
-Copy code
 git push origin feature/YourFeature
 ```
 Open a pull request.
