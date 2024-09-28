@@ -50,4 +50,38 @@ To run the Enhanced Todo List application locally, follow these steps:
    npm run dev
    ```
 
-## Thank you
+## Usage
+- To add a task, simply type in the input field and press enter.
+- Select tasks to transfer them between the lists using the transfer button.
+- The application automatically saves your tasks in the browser's localStorage, so they persist across sessions.
+
+## Contributing
+Contributions are welcome! If you have suggestions for improvements or new features, please fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
+
+Fork the repository.
+Create your feature branch:
+```bash
+Copy code
+git checkout -b feature/YourFeature 
+```
+Commit your changes:
+```bash
+Copy code
+git commit -m 'Add some feature'
+```
+Push to the branch:
+```bash
+Copy code
+git push origin feature/YourFeature
+```
+Open a pull request.
+
+## License
+
+### Notes
+- Replace `your-username` in the clone command with your actual GitHub username.
+- Update the path to the screenshot in the `![Enhanced Todo List](./path/to/your/screenshot.png)` section.
+- Adjust any sections to better reflect the specifics of your project or any additional functionality you've added.
+- Add a `LICENSE` file in your project if you haven't done so already.
+
+
