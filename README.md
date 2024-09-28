@@ -1,6 +1,6 @@
 # Enhanced Todo List
 
-![Enhanced Todo List](./path/to/your/screenshot.png) <!-- Replace with an actual screenshot path -->
+![Enhanced Todo List](https://github.com/adityaS011/EnhancedToDosApp/blob/main/public/deployed_ss.png) <!-- Replace with an actual screenshot path -->
 
 ## Table of Contents
 - [Description](#description)
